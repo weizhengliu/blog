@@ -1,4 +1,3 @@
-<h1>Listing Posts</h1>
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal BlogWeb.PostLive.FormComponent,
@@ -9,29 +8,49 @@
     return_to: Routes.post_index_path(@socket, :index) %>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="posts">
-    <%= for post <- @posts do %>
-      <tr id={"post-#{post.id}"}>
-        <td><%= post.title %></td>
-        <td><%= post.content %></td>
+<div class="flex flex-col">
+  <div class="flex justify-end -mt-10 h-8 mb-2">
+    <span class="inline-flex items-center px-4 py-2 shadow text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new) %></span>
+  </div>
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Title
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Content
+              </th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="posts" class="bg-white divide-y divide-gray-200">
+            <%= for post <- @posts do %>
+              <tr id={"post-#{post.id}"}>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= live_redirect post.title, to: Routes.post_show_path(@socket, :show, post) %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= post.content %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <span class="p-2 border broder-gray-50 rounded-lg"><%= live_redirect "🔍", to: Routes.post_show_path(@socket, :show, post) %></span>
+                  <span class="p-2 border broder-gray-50 rounded-lg"><%= live_patch "✏️", to: Routes.post_index_path(@socket, :edit, post) %></span>
+                  <span class="p-2 border broder-gray-50 rounded-lg"><%= link "🗑", to: "#", phx_click: "delete", phx_value_id: post.id, data: [confirm: "Are you sure?"] %></span>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <td>
-          <span><%= live_redirect "Show", to: Routes.post_show_path(@socket, :show, post) %></span>
-          <span><%= live_patch "Edit", to: Routes.post_index_path(@socket, :edit, post) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: post.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<span><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new) %></span>

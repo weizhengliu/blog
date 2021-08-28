@@ -1,5 +1,3 @@
-<h1>Show Post</h1>
-
 <%= if @live_action in [:edit] do %>
   <%= live_modal BlogWeb.PostLive.FormComponent,
     id: @post.id,
@@ -9,19 +7,19 @@
     return_to: Routes.post_show_path(@socket, :show, @post) %>
 <% end %>
 
-<ul>
+<article class="flex flex-col bg-white rounded-lg shadow">
 
-  <li>
-    <strong>Title:</strong>
+  <div class="font-blod text-2xl bg-blue-100 rounded-t-lg p-4">
     <%= @post.title %>
-  </li>
+  </div>
 
-  <li>
-    <strong>Content:</strong>
+  <div class="p-4">
     <%= @post.content %>
-  </li>
+  </div>
+  <div class="flex justify-end space-x-2 m-4">
+    <span class="p-2 border broder-gray-50 rounded-lg"><%= live_patch "✏️", to: Routes.post_show_path(@socket, :edit, @post) %></span>
+    <span class="p-2 border broder-gray-50 rounded-lg"><%= live_redirect "🔙", to: Routes.post_index_path(@socket, :index) %></span>
+  </div>
 
-</ul>
+</article>
 
-<span><%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.post_index_path(@socket, :index) %></span>
