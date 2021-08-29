@@ -13,7 +13,6 @@ defmodule BlogWeb.CalculatorComponent do
   end
 
   def operation_button(assigns) do
-    IO.inspect assigns
     %{operation: operation, current_operation: current_operation} = assigns
     highlight =
       if (Map.get(assigns, :operation) == current_operation), do: "border-red-500"
