@@ -1,5 +1,6 @@
 defmodule BlogWeb.CalculatorLive.Index do
   use BlogWeb, :live_view
+  import BlogWeb.CalculatorComponent
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{result: "0", operation: nil, refresh: false})}
@@ -18,7 +19,14 @@ defmodule BlogWeb.CalculatorLive.Index do
       true ->
         {:noreply, assign(socket, %{result: number, subject: result, refresh: false})}
       _ ->
-        {:noreply, assign(socket, :result, result <> number)}
+        {:noreply, assign(socket, :result, add_digit(result, number))}
+    end
+  end
+
+  defp add_digit(result, number) do
+    case result do
+      "0" -> number
+      _ -> result <> number
     end
   end
 

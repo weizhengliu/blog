@@ -4,20 +4,20 @@
     <div class="bg-gray-50 border border-gray-50 shadow rounded-lg p-2 h-12 col-span-3 text-right">
       <%= @result %>
     </div>
-    <div phx-click="operation" phx-value-operation="/" class={"bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12 #{if(@operation == "/", do: "border-red-500")}"}>➗</div>
-    <div phx-click="number" phx-value-number="7" class="bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12">7</div>
-    <div phx-click="number" phx-value-number="8" class="bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12">8</div>
-    <div phx-click="number" phx-value-number="9" class="bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12">9</div>
-    <div phx-click="operation" phx-value-operation="*" class={"bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12 #{if(@operation == "*", do: "border-red-500")}"}>✖️</div>
-    <div phx-click="number" phx-value-number="4" class="bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12">4</div>
-    <div phx-click="number" phx-value-number="5" class="bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12">5</div>
-    <div phx-click="number" phx-value-number="6" class="bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12">6</div>
-    <div phx-click="operation" phx-value-operation="-" class={"bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12 #{if(@operation == "-", do: "border-red-500")}"}>➖</div>
-    <div phx-click="number" phx-value-number="1" class="bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12">1</div>
-    <div phx-click="number" phx-value-number="2" class="bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12">2</div>
-    <div phx-click="number" phx-value-number="3" class="bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12">3</div>
-    <div phx-click="operation" phx-value-operation="+" class={"bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 w-12 #{if(@operation == "+", do: "border-red-500")}"}>➕</div>
-    <div phx-click="number" phx-value-number="0" class="bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 col-span-2">0</div>
+    <.operation_button operation="/" current_operation={@operation}>➗</.operation_button>
+    <.number_button number="7" />
+    <.number_button number="8" />
+    <.number_button number="9" />
+    <.operation_button operation="*" current_operation={@operation}>✖️</.operation_button>
+    <.number_button number="4" />
+    <.number_button number="5" />
+    <.number_button number="6" />
+    <.operation_button operation="-" current_operation={@operation}>➖</.operation_button>
+    <.number_button number="1" />
+    <.number_button number="2" />
+    <.number_button number="3" />
+    <.operation_button operation="+" current_operation={@operation}>➕</.operation_button>
+    <.number_button number="0" col_span="2" />
     <div phx-click="calculate" class="bg-blue-50 border border-gray-50 shadow rounded-lg p-2 h-12 col-span-2">＝</div>
   </div>
 </div>
